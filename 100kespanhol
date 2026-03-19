@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Espanhol - 9º Ano (T.1)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-tab.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        .question p {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            padding: 12px 15px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .options label:hover {
+            background-color: #e8f4fc;
+            border-color: #3498db;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        #restart-btn {
+            background-color: #2ecc71;
+            display: none;
+        }
+        #restart-btn:hover {
+            background-color: #27ae60;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .score {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 5px solid #28a745;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 5px solid #dc3545;
+        }
+        .progress {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-number {
+            text-align: right;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .question-group {
+            display: none;
+        }
+        .question-group.active {
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            button {
+                width: 100%;
+            }
+            .nav-tabs {
+                flex-direction: column;
+            }
+        }
+        .explanation {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 5px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Quiz de Espanhol - 9º Ano (T.1)</h1>
+            <p class="description">Teste seus conhecimentos sobre Presente de Subjuntivo e Música, Instrumentos e Estilos - 100% baseado nos slides</p>
+        </header>
+        
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showTab(1)">Presente de Subjuntivo (50 questões)</div>
+            <div class="nav-tab" onclick="showTab(2)">Música, Instrumentos e Estilos (50 questões)</div>
+        </div>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <form id="quiz-form">
+            <!-- Presente de Subjuntivo - 50 questões -->
+            <div class="question-group active" id="group-1">
+                <!-- Perguntas 1-10: Usos e funções básicas -->
+                <div class="question">
+                    <div class="question-number">Questão 1 de 50 (Subjuntivo)</div>
+                    <p>Para que se utiliza o Presente do Subjuntivo?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q1" value="a"> Para falar apenas de ações passadas e concluídas</label>
+                        <label><input type="radio" name="q1" value="b"> Para falar da irrealidade: desejos, sentimentos, dúvidas, hipóteses</label>
+                        <label><input type="radio" name="q1" value="c"> Para descrever fatos concretos e verdadeiros</label>
+                        <label><input type="radio" name="q1" value="d"> Para expressar ordens diretas no imperativo afirmativo</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Para falar da irrealidade: desejos, sentimentos, dúvidas, hipóteses</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Se utiliza este tiempo verbal para hablar de la irrealidad: expresar deseos, sentimientos, acciones futuras, orden, formular hipótesis o indicar probabilidades, entre otras funciones."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 2 de 50 (Subjuntivo)</div>
+                    <p>Qual das seguintes palavras é usada para expressar desejos em espanhol e pode ser traduzida como "tomara" em português?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q2" value="a"> Quizás</label>
+                        <label><input type="radio" name="q2" value="b"> Ojalá</label>
+                        <label><input type="radio" name="q2" value="c"> Tal vez</label>
+                        <label><input type="radio" name="q2" value="d"> A lo mejor</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Ojalá</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Ojalá puede ser traducida al portugués como 'tomara', 'quem dera' ou simplemente 'oxalá'."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 3 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta: "Ojalá que todo ______ bien."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q3" value="a"> está</label>
+                        <label><input type="radio" name="q3" value="b"> esté</label>
+                        <label><input type="radio" name="q3" value="c"> estar</label>
+                        <label><input type="radio" name="q3" value="d"> este</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) esté</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Ojalá que todo esté bien." - Após "ojalá que", usa-se o presente do subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 4 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Terminé de estudiar para el examen, ojalá ______."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q4" value="a"> apruebo</label>
+                        <label><input type="radio" name="q4" value="b"> aprobé</label>
+                        <label><input type="radio" name="q4" value="c"> apruebe</label>
+                        <label><input type="radio" name="q4" value="d"> aprobar</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) apruebe</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Terminé de estudiar para el examen, ojalá apruebe." - "Ojalá" pode ser usado sem "que" + subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 5 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Espero que te ______ pronto."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q5" value="a"> mejoras</label>
+                        <label><input type="radio" name="q5" value="b"> mejores</label>
+                        <label><input type="radio" name="q5" value="c"> mejorar</label>
+                        <label><input type="radio" name="q5" value="d"> mejoraste</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) mejores</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Espero que te mejores pronto." - "Espero que" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 6 de 50 (Subjuntivo)</div>
+                    <p>Complete: "¡Que ______ las vacaciones!"</p>
+                    <div class="options">
+                        <label><input type="radio" name="q6" value="a"> disfrutas</label>
+                        <label><input type="radio" name="q6" value="b"> disfrutes</label>
+                        <label><input type="radio" name="q6" value="c"> disfrutaste</label>
+                        <label><input type="radio" name="q6" value="d"> disfrutar</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) disfrutes</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "¡Que disfrutes las vacaciones!" - Apenas "que" + subjuntivo expressa desejo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 7 de 50 (Subjuntivo)</div>
+                    <p>Qual das seguintes expressões é usada para expressar probabilidade ou dúvida?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q7" value="a"> Estoy seguro que</label>
+                        <label><input type="radio" name="q7" value="b"> Es cierto que</label>
+                        <label><input type="radio" name="q7" value="c"> Quizás</label>
+                        <label><input type="radio" name="q7" value="d"> Es evidente que</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Quizás</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Generalmente, viene acompañado de un quizás, tal vez, puede que, es posible que, es probable que" - Essas expressões indicam probabilidade/dúvida.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 8 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Quizás ______ un viaje el próximo año."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q8" value="a"> hacemos</label>
+                        <label><input type="radio" name="q8" value="b"> hicimos</label>
+                        <label><input type="radio" name="q8" value="c"> hagamos</label>
+                        <label><input type="radio" name="q8" value="d"> haceremos</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) hagamos</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Quizás hagamos un viaje el próximo año." - "Quizás" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 9 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Tal vez no ______ una buena idea."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q9" value="a"> es</label>
+                        <label><input type="radio" name="q9" value="b"> sea</label>
+                        <label><input type="radio" name="q9" value="c"> era</label>
+                        <label><input type="radio" name="q9" value="d"> será</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) sea</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Tal vez no sea una buena idea." - "Tal vez" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 10 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Puede que ______ razón."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q10" value="a"> tienes</label>
+                        <label><input type="radio" name="q10" value="b"> tengas</label>
+                        <label><input type="radio" name="q10" value="c"> tuviste</label>
+                        <label><input type="radio" name="q10" value="d"> tendrás</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) tengas</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Puede que tengas razón." - "Puede que" exige subjuntivo.</div>
+                </div>
+
+                <!-- Perguntas 11-20: Conselhos, ordens, opiniões -->
+                <div class="question">
+                    <div class="question-number">Questão 11 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Te recomiendo que ______ el nuevo álbum."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q11" value="a"> escuchas</label>
+                        <label><input type="radio" name="q11" value="b"> escuches</label>
+                        <label><input type="radio" name="q11" value="c"> escuchaste</label>
+                        <label><input type="radio" name="q11" value="d"> escucharás</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) escuches</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Te recomiendo que escuches el nuevo álbum, ¡está buenísimo!" - Verbos de conselho + que + subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 12 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Les aconsejamos que ______ sus maletas en el hotel."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q12" value="a"> dejan</label>
+                        <label><input type="radio" name="q12" value="b"> dejen</label>
+                        <label><input type="radio" name="q12" value="c"> dejaron</label>
+                        <label><input type="radio" name="q12" value="d"> dejarán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) dejen</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Les aconsejamos que dejen sus maletas en el hotel." - "Aconsejar que" + subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 13 de 50 (Subjuntivo)</div>
+                    <p>Qual forma verbal é usada para dar uma ordem negativa?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q13" value="a"> Indicativo</label>
+                        <label><input type="radio" name="q13" value="b"> Imperativo afirmativo</label>
+                        <label><input type="radio" name="q13" value="c"> Presente do Subjuntivo</label>
+                        <label><input type="radio" name="q13" value="d"> Futuro do Indicativo</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Presente do Subjuntivo</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Eso vale para el imperativo afirmativo excepto la segunda persona del singular (tú/vos) y para todas las formas del imperativo negativo." - Imperativo negativo usa subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 14 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta: "No ______ tarde." (ordem negativa para vosotros)</p>
+                    <div class="options">
+                        <label><input type="radio" name="q14" value="a"> llegáis</label>
+                        <label><input type="radio" name="q14" value="b"> llegad</label>
+                        <label><input type="radio" name="q14" value="c"> lleguéis</label>
+                        <label><input type="radio" name="q14" value="d"> llegar</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) lleguéis</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "No lleguéis tarde, si queréis desayunar antes del paseo por el parque." - Imperativo negativo usa subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 15 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Yo siempre digo a mis hijos que no ______ chuches antes de la comida."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q15" value="a"> comen</label>
+                        <label><input type="radio" name="q15" value="b"> coman</label>
+                        <label><input type="radio" name="q15" value="c"> comieron</label>
+                        <label><input type="radio" name="q15" value="d"> comerán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) coman</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Yo siempre digo a mis hijos que no coman chuches antes de la comida." - "Decir que no" + subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 16 de 50 (Subjuntivo)</div>
+                    <p>Complete: "No ______ que ______ en esta sección."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q16" value="a"> creo / está</label>
+                        <label><input type="radio" name="q16" value="b"> creo / esté</label>
+                        <label><input type="radio" name="q16" value="c"> creo / estuvo</label>
+                        <label><input type="radio" name="q16" value="d"> creo / estará</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) creo / esté</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "No creo que esté en esta sección." - "No creo que" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 17 de 50 (Subjuntivo)</div>
+                    <p>Qual verbo NÃO é tipicamente usado para expressar emoções com subjuntivo?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q17" value="a"> Gustar</label>
+                        <label><input type="radio" name="q17" value="b"> Encantar</label>
+                        <label><input type="radio" name="q17" value="c"> Odiar</label>
+                        <label><input type="radio" name="q17" value="d"> Comprar</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: d) Comprar</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Algunos verbos frecuentes para eso son: gustar, encantar, odiar, extrañar, molestar, parecer etc." - "Comprar" não é verbo de emoção.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 18 de 50 (Subjuntivo)</div>
+                    <p>Complete: "A ella le encanta que le ______ cosas bonitas."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q18" value="a"> dicen</label>
+                        <label><input type="radio" name="q18" value="b"> digan</label>
+                        <label><input type="radio" name="q18" value="c"> dijeron</label>
+                        <label><input type="radio" name="q18" value="d"> dirán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) digan</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "A ella le encanta que le digan cosas bonitas todo el tiempo." - "Encantar que" + subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 19 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Me gusta que ______ venido."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q19" value="a"> has</label>
+                        <label><input type="radio" name="q19" value="b"> hayas</label>
+                        <label><input type="radio" name="q19" value="c"> habías</label>
+                        <label><input type="radio" name="q19" value="d"> hubiste</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) hayas</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Me gusta que hayas venido, te estaba esperando." - "Gustar que" + subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 20 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Te parece bien que ______ adelantados."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q20" value="a"> llegan</label>
+                        <label><input type="radio" name="q20" value="b"> lleguen</label>
+                        <label><input type="radio" name="q20" value="c"> llegaron</label>
+                        <label><input type="radio" name="q20" value="d"> llegarán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) lleguen</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Te parece bien que lleguen adelantados." - "Parecer bien que" + subjuntivo.</div>
+                </div>
+
+                <!-- Perguntas 21-30: Ações futuras, frases reduplicativas, conjugações regulares -->
+                <div class="question">
+                    <div class="question-number">Questão 21 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Cuando ______ del viaje, te lo contaré todo."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q21" value="a"> vuelvo</label>
+                        <label><input type="radio" name="q21" value="b"> vuelva</label>
+                        <label><input type="radio" name="q21" value="c"> volví</label>
+                        <label><input type="radio" name="q21" value="d"> volveré</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) vuelva</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Cuando vuelva del viaje, te lo contaré todo." - "Cuando" + subjuntivo para ação futura.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 22 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Llámame en cuanto ______ a casa."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q22" value="a"> llegas</label>
+                        <label><input type="radio" name="q22" value="b"> llegues</label>
+                        <label><input type="radio" name="q22" value="c"> llegaste</label>
+                        <label><input type="radio" name="q22" value="d"> llegarás</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) llegues</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Llámame en cuanto llegues a casa." - "En cuanto" + subjuntivo para ação futura.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 23 de 50 (Subjuntivo)</div>
+                    <p>Complete a frase reduplicativa: "______ lo que ______, estaré siempre contigo."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q23" value="a"> Pasa / pasa</label>
+                        <label><input type="radio" name="q23" value="b"> Pase / pase</label>
+                        <label><input type="radio" name="q23" value="c"> Pasó / pasó</label>
+                        <label><input type="radio" name="q23" value="d"> Pasará / pasará</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Pase / pase</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Pase lo que pase, estaré siempre contigo." - Frases reduplicativas usam subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 24 de 50 (Subjuntivo)</div>
+                    <p>Complete a frase reduplicativa: "______ lo que ______, no me apartaré de ti."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q24" value="a"> Haces / haces</label>
+                        <label><input type="radio" name="q24" value="b"> Hagas / hagas</label>
+                        <label><input type="radio" name="q24" value="c"> Hiciste / hiciste</label>
+                        <label><input type="radio" name="q24" value="d"> Harás / harás</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Hagas / hagas</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Hagas lo que hagas, no me apartaré de ti." - Frases reduplicativas usam subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 25 de 50 (Subjuntivo)</div>
+                    <p>Com qual expressão NÃO se usa subjuntivo, mas sim indicativo?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q25" value="a"> Quizás</label>
+                        <label><input type="radio" name="q25" value="b"> Tal vez</label>
+                        <label><input type="radio" name="q25" value="c"> A lo mejor</label>
+                        <label><input type="radio" name="q25" value="d"> Ojalá</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) A lo mejor</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "¡OJO! Usamos el modo indicativo con la locución adverbial a lo mejor: A lo mejor María llega temprano hoy."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 26 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta: "A lo mejor María ______ temprano hoy."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q26" value="a"> llegue</label>
+                        <label><input type="radio" name="q26" value="b"> llega</label>
+                        <label><input type="radio" name="q26" value="c"> llegara</label>
+                        <label><input type="radio" name="q26" value="d"> llegase</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) llega</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "A lo mejor María llega temprano hoy." - "A lo mejor" exige indicativo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 27 de 50 (Subjuntivo)</div>
+                    <p>Qual é a terminação correta para verbos AR na primeira pessoa do singular (yo) no presente do subjuntivo?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q27" value="a"> -o</label>
+                        <label><input type="radio" name="q27" value="b"> -e</label>
+                        <label><input type="radio" name="q27" value="c"> -a</label>
+                        <label><input type="radio" name="q27" value="d"> -as</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) -e</div>
+                    <div class="explanation" style="display: none;">Segundo a tabela de verbos regulares: Para verbos AR: Yo habl e, Tú habl es, Él habl e, Nosotros habl emos, Vosotros habl éis, Ellos habl en.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 28 de 50 (Subjuntivo)</div>
+                    <p>Qual é a terminação correta para verbos ER na terceira pessoa do plural (ellos) no presente do subjuntivo?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q28" value="a"> -en</label>
+                        <label><input type="radio" name="q28" value="b"> -an</label>
+                        <label><input type="radio" name="q28" value="c"> -on</label>
+                        <label><input type="radio" name="q28" value="d"> -ían</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) -an</div>
+                    <div class="explanation" style="display: none;">Segundo a tabela: Verbos ER: Ellos com an.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 29 de 50 (Subjuntivo)</div>
+                    <p>Qual é a terminação correta para verbos IR na primeira pessoa do plural (nosotros) no presente do subjuntivo?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q29" value="a"> -imos</label>
+                        <label><input type="radio" name="q29" value="b"> -emos</label>
+                        <label><input type="radio" name="q29" value="c"> -amos</label>
+                        <label><input type="radio" name="q29" value="d"> -íamos</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) -amos</div>
+                    <div class="explanation" style="display: none;">Segundo a tabela: Verbos IR: Nosotros viv amos.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 30 de 50 (Subjuntivo)</div>
+                    <p>Conjugue o verbo "hablar" para "vosotros" no presente do subjuntivo:</p>
+                    <div class="options">
+                        <label><input type="radio" name="q30" value="a"> habláis</label>
+                        <label><input type="radio" name="q30" value="b"> hablad</label>
+                        <label><input type="radio" name="q30" value="c"> habléis</label>
+                        <label><input type="radio" name="q30" value="d"> hablan</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) habléis</div>
+                    <div class="explanation" style="display: none;">Segundo a tabela: Verbos AR: Vosotros habl éis.</div>
+                </div>
+
+                <!-- Perguntas 31-40: Verbos irregulares -->
+                <div class="question">
+                    <div class="question-number">Questão 31 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo PODER: "Espero que Luis ______ visitarnos este verano."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q31" value="a"> puede</label>
+                        <label><input type="radio" name="q31" value="b"> puedo</label>
+                        <label><input type="radio" name="q31" value="c"> pueda</label>
+                        <label><input type="radio" name="q31" value="d"> podrá</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) pueda</div>
+                    <div class="explanation" style="display: none;">Segundo o slide de verbos irregulares: "Espero que Luis pueda visitarnos este verano."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 32 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo PODER: "Quizás ______ ayudarme con estas invitaciones." (vosotros)</p>
+                    <div class="options">
+                        <label><input type="radio" name="q32" value="a"> podéis</label>
+                        <label><input type="radio" name="q32" value="b"> podáis</label>
+                        <label><input type="radio" name="q32" value="c"> poded</label>
+                        <label><input type="radio" name="q32" value="d"> pudierais</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) podáis</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Quizás podáis ayudarme con estas invitaciones." - Conjugação de PODER no subjuntivo: (yo) pueda, (tú) puedas, (él) pueda, (nosotros) podamos, (vosotros) podáis, (ellos) puedan.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 33 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo IR: "No creo que el gobierno ______ a subir los impuestos nuevamente."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q33" value="a"> va</label>
+                        <label><input type="radio" name="q33" value="b"> vaya</label>
+                        <label><input type="radio" name="q33" value="c"> irá</label>
+                        <label><input type="radio" name="q33" value="d"> fue</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) vaya</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "No creo que el gobierno vaya a subir los impuestos nuevamente." - Conjugação de IR: vaya, vayas, vaya, vayamos, vayáis, vayan.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 34 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo TENER: "Es importante que los niños ______ una distracción para las vacaciones."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q34" value="a"> tienen</label>
+                        <label><input type="radio" name="q34" value="b"> tengan</label>
+                        <label><input type="radio" name="q34" value="c"> tenían</label>
+                        <label><input type="radio" name="q34" value="d"> tendrán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) tengan</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Es importante que los niños tengan una distracción para las vacaciones." - Conjugação de TENER: tenga, tengas, tenga, tengamos, tengáis, tengan.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 35 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo HACER: "Te advierto que ______ tus tareas de casa con antelación." (tú)</p>
+                    <div class="options">
+                        <label><input type="radio" name="q35" value="a"> haces</label>
+                        <label><input type="radio" name="q35" value="b"> hagas</label>
+                        <label><input type="radio" name="q35" value="c"> hiciste</label>
+                        <label><input type="radio" name="q35" value="d"> harás</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) hagas</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Te advierto que hagas tus tareas de casa con antelación." - Conjugação de HACER: haga, hagas, haga, hagamos, hagáis, hagan.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 36 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo QUERER: "Nos gusta que los profesores ______ desarrollar clases más interesantes."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q36" value="a"> quieren</label>
+                        <label><input type="radio" name="q36" value="b"> quieran</label>
+                        <label><input type="radio" name="q36" value="c"> querían</label>
+                        <label><input type="radio" name="q36" value="d"> querrán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) quieran</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Nos gusta que los profesores quieran desarrollar clases más interesantes para los alumnos." - Conjugação de QUERER: quiera, quieras, quiera, queramos, queráis, quieran.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 37 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo HABER: "Me gusta que ______ sustituido los ordenadores averiados."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q37" value="a"> han</label>
+                        <label><input type="radio" name="q37" value="b"> hayan</label>
+                        <label><input type="radio" name="q37" value="c"> habían</label>
+                        <label><input type="radio" name="q37" value="d"> habrán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) hayan</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Me gusta que hayan sustituido los ordenadores averiados por otros nuevos." - Conjugação de HABER: haya, hayas, haya, hayamos, hayáis, hayan.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 38 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo TENER: "Tal vez ______ invitados esta noche para cenar." (nosotros)</p>
+                    <div class="options">
+                        <label><input type="radio" name="q38" value="a"> tenemos</label>
+                        <label><input type="radio" name="q38" value="b"> tengamos</label>
+                        <label><input type="radio" name="q38" value="c"> teníamos</label>
+                        <label><input type="radio" name="q38" value="d"> tendremos</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) tengamos</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Tal vez tengamos invitados esta noche para cenar." - Conjugação de TENER: tenga, tengas, tenga, tengamos, tengáis, tengan.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 39 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo SER: "Cuando ______ mayor, ¿quieres ser artista plástico?" (tú)</p>
+                    <div class="options">
+                        <label><input type="radio" name="q39" value="a"> eres</label>
+                        <label><input type="radio" name="q39" value="b"> seas</label>
+                        <label><input type="radio" name="q39" value="c"> eras</label>
+                        <label><input type="radio" name="q39" value="d"> serás</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) seas</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Cuando seas mayor, ¿quieres ser artista plástico?" - Conjugação de SER: sea, seas, sea, seamos, seáis, sean.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 40 de 50 (Subjuntivo)</div>
+                    <p>Complete com a forma correta do verbo VALER: "Espero que ______ para hoy la entrada que compré ayer."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q40" value="a"> vale</label>
+                        <label><input type="radio" name="q40" value="b"> valga</label>
+                        <label><input type="radio" name="q40" value="c"> valdrá</label>
+                        <label><input type="radio" name="q40" value="d"> valía</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) valga</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Espero que valga para hoy la entrada que compré ayer en la taquilla del museo." - Verbo VALER no subjuntivo: valga.</div>
+                </div>
+
+                <!-- Perguntas 41-50: Exercícios de aplicação -->
+                <div class="question">
+                    <div class="question-number">Questão 41 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Quizás (llamar, él) ______ más tarde."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q41" value="a"> llama</label>
+                        <label><input type="radio" name="q41" value="b"> llame</label>
+                        <label><input type="radio" name="q41" value="c"> llamó</label>
+                        <label><input type="radio" name="q41" value="d"> llamará</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) llame</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício do slide: "Quizás llame más tarde." - "Quizás" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 42 de 50 (Subjuntivo)</div>
+                    <p>Complete: "No creo que mis vecinos (limpiar) ______ su piso cada día."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q42" value="a"> limpian</label>
+                        <label><input type="radio" name="q42" value="b"> limpien</label>
+                        <label><input type="radio" name="q42" value="c"> limpiaron</label>
+                        <label><input type="radio" name="q42" value="d"> limpiarán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) limpien</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "No creo que mis vecinos limpien su piso cada día." - "No creo que" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 43 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Ojalá (vivir, nosotros) ______ más cerca."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q43" value="a"> vivimos</label>
+                        <label><input type="radio" name="q43" value="b"> vivamos</label>
+                        <label><input type="radio" name="q43" value="c"> vivimos</label>
+                        <label><input type="radio" name="q43" value="d"> viviremos</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) vivamos</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "Ojalá vivamos más cerca." - "Ojalá" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 44 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Cuando (escribir, tú) ______ una carta, no (olvidar, tú) ______ pulsar el botón."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q44" value="a"> escribes / olvidas</label>
+                        <label><input type="radio" name="q44" value="b"> escribas / olvides</label>
+                        <label><input type="radio" name="q44" value="c"> escribiste / olvidaste</label>
+                        <label><input type="radio" name="q44" value="d"> escribirás / olvidarás</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) escribas / olvides</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "Cuando escribas una carta, no olvides pulsar el botón." - "Cuando" + subjuntivo para futuro, "no" + subjuntivo para imperativo negativo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 45 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Aunque (trabajar, ustedes) ______ todo el día, no podrán terminar."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q45" value="a"> trabajan</label>
+                        <label><input type="radio" name="q45" value="b"> trabajen</label>
+                        <label><input type="radio" name="q45" value="c"> trabajaron</label>
+                        <label><input type="radio" name="q45" value="d"> trabajarán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) trabajen</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "Aunque trabajen todo el día, no podrán terminar la tarea de hoy." - "Aunque" pode usar subjuntivo para hipótese.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 46 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Necesito que me (leer, vosotros) ______ el libro."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q46" value="a"> leéis</label>
+                        <label><input type="radio" name="q46" value="b"> leáis</label>
+                        <label><input type="radio" name="q46" value="c"> leed</label>
+                        <label><input type="radio" name="q46" value="d"> leyerais</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) leáis</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "Necesito que me leáis el libro." - "Necesitar que" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 47 de 50 (Subjuntivo)</div>
+                    <p>Complete: "No me gusta que (pasar, tú) ______ mucho tiempo mirando telenovelas."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q47" value="a"> pasas</label>
+                        <label><input type="radio" name="q47" value="b"> pases</label>
+                        <label><input type="radio" name="q47" value="c"> pasaste</label>
+                        <label><input type="radio" name="q47" value="d"> pasarás</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) pases</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "No me gusta que pases mucho tiempo mirando telenovelas." - "Gustar que" + subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 48 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Mi amiga no cree que (recibir, ella) ______ muchos regalos este año."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q48" value="a"> recibe</label>
+                        <label><input type="radio" name="q48" value="b"> reciba</label>
+                        <label><input type="radio" name="q48" value="c"> recibió</label>
+                        <label><input type="radio" name="q48" value="d"> recibirá</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) reciba</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "Mi amiga no cree que reciba muchos regalos este año." - "No creer que" exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 49 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Necesito un teléfono que (funcionar) ______ tres días seguidos."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q49" value="a"> funciona</label>
+                        <label><input type="radio" name="q49" value="b"> funcione</label>
+                        <label><input type="radio" name="q49" value="c"> funcionó</label>
+                        <label><input type="radio" name="q49" value="d"> funcionará</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) funcione</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "Necesito un teléfono que funcione tres días seguidos." - Oração adjetiva com antecedente indefinido exige subjuntivo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 50 de 50 (Subjuntivo)</div>
+                    <p>Complete: "Siento que no (reciclar, ustedes) ______ la basura."</p>
+                    <div class="options">
+                        <label><input type="radio" name="q50" value="a"> reciclan</label>
+                        <label><input type="radio" name="q50" value="b"> reciclen</label>
+                        <label><input type="radio" name="q50" value="c"> reciclaron</label>
+                        <label><input type="radio" name="q50" value="d"> reciclarán</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) reciclen</div>
+                    <div class="explanation" style="display: none;">Segundo o exercício: "Siento que no reciclen la basura." - "Sentir que" (sentir emoção) exige subjuntivo.</div>
+                </div>
+            </div>
+
+            <!-- Música, Instrumentos e Estilos - 50 questões -->
+            <div class="question-group" id="group-2">
+                <!-- Perguntas 1-10: Musicoterapia -->
+                <div class="question">
+                    <div class="question-number">Questão 1 de 50 (Música)</div>
+                    <p>O que a musicoterapia estimula no cérebro para aliviar ansiedade e tristeza?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q51" value="a"> Adrenalina</label>
+                        <label><input type="radio" name="q51" value="b"> Serotonina</label>
+                        <label><input type="radio" name="q51" value="c"> Cortisol</label>
+                        <label><input type="radio" name="q51" value="d"> Dopamina</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Serotonina</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "La musicoterapia puede ser muy efectiva para aliviar estados de ansiedad o tristeza, ya que estimula la producción de serotonina."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 2 de 50 (Música)</div>
+                    <p>Nas sessões de musicoterapia, como os especialistas escolhem as músicas?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q52" value="a"> Usam apenas músicas clássicas</label>
+                        <label><input type="radio" name="q52" value="b"> Seguem os gostos musicais do paciente</label>
+                        <label><input type="radio" name="q52" value="c"> Usam peças musicais para induzir sentimentos necessários para cada problema</label>
+                        <label><input type="radio" name="q52" value="d"> Escolhem músicas aleatórias</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Usam peças musicais para induzir sentimentos necessários para cada problema</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "En las sesiones de musicoterapia, los expertos usan ciertas piezas musicales para inducirnos los sentimientos que se requieren en el momento de trabajar cada uno de los problemas que presentamos."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 3 de 50 (Música)</div>
+                    <p>Em casa, que tipo de música podemos escutar para notar efeitos positivos?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q53" value="a"> Apenas música clássica</label>
+                        <label><input type="radio" name="q53" value="b"> Qualquer música que nos guste</label>
+                        <label><input type="radio" name="q53" value="c"> Música instrumental apenas</label>
+                        <label><input type="radio" name="q53" value="d"> Música em espanhol</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Qualquer música que nos guste</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "en casa, podremos escuchar cualquier música que nos guste y pronto notaremos los efectos positivos de ella."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 4 de 50 (Música)</div>
+                    <p>Qual benefício da musicoterapia é exclusivo para ADULTOS segundo o slide?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q54" value="a"> Melhora a socialização</label>
+                        <label><input type="radio" name="q54" value="b"> Melhora a autoestima</label>
+                        <label><input type="radio" name="q54" value="c"> Ajuda pessoas com doenças degenerativas a se sentirem melhor</label>
+                        <label><input type="radio" name="q54" value="d"> Ajuda no aprendizado</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Ajuda pessoas com doenças degenerativas a se sentirem melhor</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: Benefícios para ADULTOS: "Mejora la socialización con los demás. Reduce el estrés y la ansiedad. Ayuda a personas con enfermedades degenerativas a sentirse mejor."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 5 de 50 (Música)</div>
+                    <p>Qual benefício da musicoterapia é exclusivo para CRIANÇAS segundo o slide?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q55" value="a"> Reduz o estresse e ansiedade</label>
+                        <label><input type="radio" name="q55" value="b"> Ajuda a melhorar o aprendizado e tratar dificuldades neste campo</label>
+                        <label><input type="radio" name="q55" value="c"> Melhora a socialização</label>
+                        <label><input type="radio" name="q55" value="d"> Reduz o estresse</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Ajuda a melhorar o aprendizado e tratar dificuldades neste campo</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: Benefícios para CRIANÇAS: "Ayuda a mejorar el aprendizaje y a tratar las dificultades en este campo. Mejora la autoestima. Mejora la socialización."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 6 de 50 (Música)</div>
+                    <p>Qual benefício é COMUM a adultos e crianças na musicoterapia?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q56" value="a"> Ajuda com doenças degenerativas</label>
+                        <label><input type="radio" name="q56" value="b"> Ajuda no aprendizado</label>
+                        <label><input type="radio" name="q56" value="c"> Melhora a socialização</label>
+                        <label><input type="radio" name="q56" value="d"> Reduz o estresse</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Melhora a socialização</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Melhora a socialização" aparece tanto nos benefícios para adultos quanto para crianças.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 7 de 50 (Música)</div>
+                    <p>Qual hormônio é conhecido como "hormônio do bom humor e da felicidade"?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q57" value="a"> Adrenalina</label>
+                        <label><input type="radio" name="q57" value="b"> Serotonina</label>
+                        <label><input type="radio" name="q57" value="c"> Noradrenalina</label>
+                        <label><input type="radio" name="q57" value="d"> Ocitocina</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Serotonina</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "la música tiene ciertos componentes que actúan de manera beneficiosa en nuestro cerebro y estimula partes de este para que glándulas segreguen la serotonina, hormona del buen humor y de la felicidad."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 8 de 50 (Música)</div>
+                    <p>Segundo o texto, o que acontece quando escutamos música em casa?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q58" value="a"> Não sentimos nenhum efeito</label>
+                        <label><input type="radio" name="q58" value="b"> Nos sentiremos más vivos, más alegres e teremos mais vontade de fazer as tarefas</label>
+                        <label><input type="radio" name="q58" value="c"> Ficamos mais tristes</label>
+                        <label><input type="radio" name="q58" value="d"> Perdemos a concentração</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Nos sentiremos más vivos, más alegres e teremos mais vontade de fazer as tarefas</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Veremos que nos sentiremos más vivos y más alegres y que, además, tendremos muchas más ganas de hacer las tareas que tenemos pendientes."</div>
+                </div>
+
+                <!-- Perguntas 9-20: Instrumentos musicais -->
+                <div class="question">
+                    <div class="question-number">Questão 9 de 50 (Música)</div>
+                    <p>Qual destes instrumentos pertence à classe de SOPRO (viento)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q59" value="a"> El piano</label>
+                        <label><input type="radio" name="q59" value="b"> La guitarra</label>
+                        <label><input type="radio" name="q59" value="c"> El clarinete</label>
+                        <label><input type="radio" name="q59" value="d"> El violín</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) El clarinete</div>
+                    <div class="explanation" style="display: none;">Segundo a classificação dos slides: Sopro: el clarinete, la flauta, la trompeta, la armónica.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 10 de 50 (Música)</div>
+                    <p>Qual destes instrumentos pertence à classe de CORDAS (cuerda)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q60" value="a"> La batería</label>
+                        <label><input type="radio" name="q60" value="b"> La flauta</label>
+                        <label><input type="radio" name="q60" value="c"> El violín</label>
+                        <label><input type="radio" name="q60" value="d"> El bombo</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) El violín</div>
+                    <div class="explanation" style="display: none;">Segundo a classificação dos slides: Cordas: el piano, la guitarra, el violín, el contrabajo.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 11 de 50 (Música)</div>
+                    <p>Qual destes instrumentos pertence à classe de PERCUSSÃO (percusión)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q61" value="a"> El clarinete</label>
+                        <label><input type="radio" name="q61" value="b"> La guitarra</label>
+                        <label><input type="radio" name="q61" value="c"> El timbal</label>
+                        <label><input type="radio" name="q61" value="d"> La flauta</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) El timbal</div>
+                    <div class="explanation" style="display: none;">Segundo a classificação dos slides: Percussão: el bombo, la batería, la pandereta, el timbal.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 12 de 50 (Música)</div>
+                    <p>Qual é a descrição correta para a classe de SOPRO (viento)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q62" value="a"> Produzem som pela vibração das cordas</label>
+                        <label><input type="radio" name="q62" value="b"> Produzem som pela vibração do ar</label>
+                        <label><input type="radio" name="q62" value="c"> Produzem som ao serem batidos, sacudidos ou raspados</label>
+                        <label><input type="radio" name="q62" value="d"> Produzem som por meio eletrônico</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Produzem som pela vibração do ar</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: Sopro (Viento) - Produzem som pela vibração do ar.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 13 de 50 (Música)</div>
+                    <p>Qual é a descrição correta para a classe de CORDAS (cuerda)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q63" value="a"> Produzem som pela vibração do ar</label>
+                        <label><input type="radio" name="q63" value="b"> Produzem som pela vibração das cordas</label>
+                        <label><input type="radio" name="q63" value="c"> Produzem som ao serem batidos, sacudidos ou raspados</label>
+                        <label><input type="radio" name="q63" value="d"> Produzem som por meio eletrônico</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Produzem som pela vibração das cordas</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: Cordas (Cuerda) - Produzem som pela vibração das cordas.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 14 de 50 (Música)</div>
+                    <p>Qual é a descrição correta para a classe de PERCUSSÃO (percusión)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q64" value="a"> Produzem som pela vibração do ar</label>
+                        <label><input type="radio" name="q64" value="b"> Produzem som pela vibração das cordas</label>
+                        <label><input type="radio" name="q64" value="c"> Produzem som ao serem batidos, sacudidos ou raspados</label>
+                        <label><input type="radio" name="q64" value="d"> Produzem som por meio eletrônico</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Produzem som ao serem batidos, sacudidos ou raspados</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: Percussão (Percusión) - Produzem som ao serem batidos, sacudidos ou raspados.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 15 de 50 (Música)</div>
+                    <p>Qual destes instrumentos é classificado como "outros" (sopro com fole)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q65" value="a"> Las maracas</label>
+                        <label><input type="radio" name="q65" value="b"> La armónica</label>
+                        <label><input type="radio" name="q65" value="c"> El bandoneón</label>
+                        <label><input type="radio" name="q65" value="d"> Las castañuelas</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) El bandoneón</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "OTROS INSTRUMENTOS MUSICALES: las maracas, la armónica, las castañuelas, el bandoneón." O bandoneón é um instrumento de sopro com fole.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 16 de 50 (Música)</div>
+                    <p>As castañuelas são instrumentos típicos de qual país?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q66" value="a"> Brasil</label>
+                        <label><input type="radio" name="q66" value="b"> Argentina</label>
+                        <label><input type="radio" name="q66" value="c"> Espanha</label>
+                        <label><input type="radio" name="q66" value="d"> México</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Espanha</div>
+                    <div class="explanation" style="display: none;">As castañuelas são instrumentos típicos da Espanha, frequentemente associadas ao flamenco.</div>
+                </div>
+
+                <!-- Perguntas 17-30: Estilos musicais -->
+                <div class="question">
+                    <div class="question-number">Questão 17 de 50 (Música)</div>
+                    <p>Onde foi desenvolvido o estilo musical Rap (Hip Hop)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q67" value="a"> Europa</label>
+                        <label><input type="radio" name="q67" value="b"> Estados Unidos</label>
+                        <label><input type="radio" name="q67" value="c"> Brasil</label>
+                        <label><input type="radio" name="q67" value="d"> Jamaica</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Estados Unidos</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Rap: Conocido en algunos contextos como hip hop, se trata de un estilo musical desarrollado en Estados Unidos a finales de la década de 1960 y principios de 1970."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 18 de 50 (Música)</div>
+                    <p>Qual é a origem do K-Pop?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q68" value="a"> Japão</label>
+                        <label><input type="radio" name="q68" value="b"> China</label>
+                        <label><input type="radio" name="q68" value="c"> Coreia do Sul</label>
+                        <label><input type="radio" name="q68" value="d"> Tailândia</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Coreia do Sul</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "K-Pop: se identifica el estilo con la música popular de Corea del Sur. El género surgió en este país asiático."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 19 de 50 (Música)</div>
+                    <p>Quais estilos influenciaram o K-Pop?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q69" value="a"> Apenas pop</label>
+                        <label><input type="radio" name="q69" value="b"> Rock, jazz, rap, reggae, música electrónica e pop</label>
+                        <label><input type="radio" name="q69" value="c"> Apenas música clássica</label>
+                        <label><input type="radio" name="q69" value="d"> Apenas música tradicional coreana</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Rock, jazz, rap, reggae, música electrónica e pop</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "El género surgió en este país asiático bebiendo de las fuentes de diferentes estilos, como lo son el rock, el jazz, el rap, el reggae, la música electrónica y por supuesto el pop."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 20 de 50 (Música)</div>
+                    <p>Qual é a origem do Rock?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q70" value="a"> Inglaterra</label>
+                        <label><input type="radio" name="q70" value="b"> Estados Unidos</label>
+                        <label><input type="radio" name="q70" value="c"> Alemanha</label>
+                        <label><input type="radio" name="q70" value="d"> França</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Estados Unidos</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Rock: Sus orígenes los encontramos en el rock and roll, estilo que surgió a finales de la década de 1940 y principios de 1950." nos EUA.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 21 de 50 (Música)</div>
+                    <p>Quando surgiu a música eletrônica?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q71" value="a"> Década de 1950</label>
+                        <label><input type="radio" name="q71" value="b"> Final do século XIX</label>
+                        <label><input type="radio" name="q71" value="c"> Década de 1980</label>
+                        <label><input type="radio" name="q71" value="d"> Início do século XX</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Final do século XIX</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Podemos fechar su inicio en paralelo con el desarrollo de los primeros instrumentos musicales electrónicos. Esto es, a finales del siglo XIX."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 22 de 50 (Música)</div>
+                    <p>Em quais países começaram a distribuir-se as primeiras canções de música eletrônica?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q72" value="a"> Brasil e Argentina</label>
+                        <label><input type="radio" name="q72" value="b"> Alemania, Francia, Estados Unidos y Japón</label>
+                        <label><input type="radio" name="q72" value="c"> Inglaterra e Irlanda</label>
+                        <label><input type="radio" name="q72" value="d"> Itália e Espanha</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Alemania, Francia, Estados Unidos y Japón</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "En países como Alemania, Francia, Estados Unidos y Japón empezaron a distribuirse las primeras canciones de música electrónica."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 23 de 50 (Música)</div>
+                    <p>Qual é a diferença entre Pop e Rock segundo o slide?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q73" value="a"> Sempre foram estilos diferentes</label>
+                        <label><input type="radio" name="q73" value="b"> Nos anos 1950/1960 eram usados como sinônimos e se diferenciaram no final dos anos 1960</label>
+                        <label><input type="radio" name="q73" value="c"> O Rock é mais aberto aos receptores</label>
+                        <label><input type="radio" name="q73" value="d"> O Pop é mais antigo</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Nos anos 1950/1960 eram usados como sinônimos e se diferenciaram no final dos anos 1960</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Sus inicios los encontramos en la década de 1950 y 1960. Para entonces, el pop y el rock se usaban como sinónimos. A finales de 1960 se empiezan a distinguir como dos estilos diferentes."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 24 de 50 (Música)</div>
+                    <p>Qual a origem da música clásica?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q74" value="a"> Música folclórica</label>
+                        <label><input type="radio" name="q74" value="b"> Música litúrgica</label>
+                        <label><input type="radio" name="q74" value="c"> Música popular</label>
+                        <label><input type="radio" name="q74" value="d"> Música africana</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Música litúrgica</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Tiene sus orígenes en la música litúrgica, aunque después se distanció hacia un estilo más secular."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 25 de 50 (Música)</div>
+                    <p>Quais são as correntes da música clásica mencionadas?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q75" value="a"> Rock, pop, jazz</label>
+                        <label><input type="radio" name="q75" value="b"> Renacimiento, romanticismo, barroco, clasicismo</label>
+                        <label><input type="radio" name="q75" value="c"> Salsa, merengue, bachata</label>
+                        <label><input type="radio" name="q75" value="d"> Blues, soul, gospel</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Renacimiento, romanticismo, barroco, clasicismo</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Se distinguen varias corrientes, como son la música clásica del renacimiento, el romanticismo, el barroco, el clasicismo."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 26 de 50 (Música)</div>
+                    <p>O que significa que a música country é a "antesala del rock"?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q76" value="a"> É um subgênero do rock</label>
+                        <label><input type="radio" name="q76" value="b"> É posterior ao rock</label>
+                        <label><input type="radio" name="q76" value="c"> É anterior e precursora do rock</label>
+                        <label><input type="radio" name="q76" value="d"> Não tem relação com o rock</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) É anterior e precursora do rock</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "La música country es la antesala del rock y otros géneros" - "Antesala" significa que veio antes e preparou o caminho.</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 27 de 50 (Música)</div>
+                    <p>Qual é a relação do Metal com o Rock?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q77" value="a"> São estilos completamente diferentes</label>
+                        <label><input type="radio" name="q77" value="b"> Metal é um subgénero do rock</label>
+                        <label><input type="radio" name="q77" value="c"> Rock é um subgénero do metal</label>
+                        <label><input type="radio" name="q77" value="d"> Não têm relação</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Metal é um subgénero do rock</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Técnicamente, el metal, también conocido como heavy metal, es un subgénero de la música rock."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 28 de 50 (Música)</div>
+                    <p>Quais são as principais características do Metal?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q78" value="a"> Ritmos suaves e letras românticas</label>
+                        <label><input type="radio" name="q78" value="b"> Ritmos más fuertes y solos de guitarra largos</label>
+                        <label><input type="radio" name="q78" value="c"> Uso de orquestras sinfônicas</label>
+                        <label><input type="radio" name="q78" value="d"> Dança e coreografias</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Ritmos más fuertes y solos de guitarra largos</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "El enfoque en ritmos más fuertes y solos de guitarra largos son dos de sus principales características."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 29 de 50 (Música)</div>
+                    <p>Onde nasceram o Soul e o Rhythm and Blues (R&B)?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q79" value="a"> Norte dos Estados Unidos</label>
+                        <label><input type="radio" name="q79" value="b"> Sul dos Estados Unidos</label>
+                        <label><input type="radio" name="q79" value="c"> Inglaterra</label>
+                        <label><input type="radio" name="q79" value="d"> Caribe</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Sul dos Estados Unidos</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "El soul y el rhythm and blues (abreviado como R&B) son géneros nacidos en el sur de los Estados Unidos."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 30 de 50 (Música)</div>
+                    <p>Em quais estilos o Soul e R&B se inspiram?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q80" value="a"> Rock e pop</label>
+                        <label><input type="radio" name="q80" value="b"> Música afro-americana, blues e gospel</label>
+                        <label><input type="radio" name="q80" value="c"> Música clássica europeia</label>
+                        <label><input type="radio" name="q80" value="d"> Música asiática</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Música afro-americana, blues e gospel</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "inspirados en la música de afroamericanos, como el blues, y otras formas, incluso con matices más religiosos o espirituales, como el góspel."</div>
+                </div>
+
+                <!-- Perguntas 31-40: Mais estilos -->
+                <div class="question">
+                    <div class="question-number">Questão 31 de 50 (Música)</div>
+                    <p>Por que o Flamenco é considerado mais que um gênero musical?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q81" value="a"> Porque é muito antigo</label>
+                        <label><input type="radio" name="q81" value="b"> Porque é popular apenas na Espanha</label>
+                        <label><input type="radio" name="q81" value="c"> Porque é considerado toda uma cultura</label>
+                        <label><input type="radio" name="q81" value="d"> Porque tem muitos instrumentos</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) Porque é considerado toda uma cultura</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "El flamenco no es un solo un género musical ni tampoco un estilo. Su historia y particularidades desbordan estas categorías, de manera que sus fanáticos, precursores y exponentes lo consideran toda una cultura."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 32 de 50 (Música)</div>
+                    <p>Quais elementos compõem o Flamenco?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q82" value="a"> Apenas a guitarra</label>
+                        <label><input type="radio" name="q82" value="b"> La voz, la guitarra y el baile</label>
+                        <label><input type="radio" name="q82" value="c"> Bateria e baixo</label>
+                        <label><input type="radio" name="q82" value="d"> Piano e violino</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) La voz, la guitarra y el baile</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "La voz, la guitarra y el baile del flamenco han hecho que se distinga de otros géneros musicales más populares."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 33 de 50 (Música)</div>
+                    <p>Onde nasceu o Jazz?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q83" value="a"> Chicago</label>
+                        <label><input type="radio" name="q83" value="b"> Nova Orleans, Luisiana</label>
+                        <label><input type="radio" name="q83" value="c"> Nova York</label>
+                        <label><input type="radio" name="q83" value="d"> Los Angeles</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Nova Orleans, Luisiana</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "El jazz nace entre las comunidades afroamericanas de Nueva Orleans, Luisiana, en Estados Unidos."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 34 de 50 (Música)</div>
+                    <p>Qual é a característica mais importante do Jazz?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q84" value="a"> A letra</label>
+                        <label><input type="radio" name="q84" value="b"> A improvisação</label>
+                        <label><input type="radio" name="q84" value="c"> A dança</label>
+                        <label><input type="radio" name="q84" value="d"> O ritmo acelerado</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) A improvisação</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Entre otras cosas, la improvisación es una de sus características más importantes."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 35 de 50 (Música)</div>
+                    <p>Com o que o Blues está relacionado?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q85" value="a"> Comunidades de trabalho da população afro-americana</label>
+                        <label><input type="radio" name="q85" value="b"> A corte europeia</label>
+                        <label><input type="radio" name="q85" value="c"> A música religiosa católica</label>
+                        <label><input type="radio" name="q85" value="d"> A música indígena</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: a) Comunidades de trabalho da população afro-americana</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Está relacionado directamente con las comunidades de trabajo de la población afroamericana."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 36 de 50 (Música)</div>
+                    <p>Qual a importância do Blues para outros gêneros?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q86" value="a"> É derivado do rock</label>
+                        <label><input type="radio" name="q86" value="b"> É a base sobre a qual se construíram jazz, rock e country</label>
+                        <label><input type="radio" name="q86" value="c"> É um subgênero do jazz</label>
+                        <label><input type="radio" name="q86" value="d"> Não influenciou outros gêneros</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) É a base sobre a qual se construíram jazz, rock e country</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "El blues es la base sobre la que se han construido otros géneros, como el jazz, el rock o la música country."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 37 de 50 (Música)</div>
+                    <p>Qual é a origem da Bossa Nova?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q87" value="a"> Argentina</label>
+                        <label><input type="radio" name="q87" value="b"> Brasil</label>
+                        <label><input type="radio" name="q87" value="c"> Portugal</label>
+                        <label><input type="radio" name="q87" value="d"> Espanha</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Brasil</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Se considera originario de Brasil, pero se toca en todas partes del mundo."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 38 de 50 (Música)</div>
+                    <p>Qual a relação da Bossa Nova com o Jazz?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q88" value="a"> É idêntica ao jazz</label>
+                        <label><input type="radio" name="q88" value="b"> Em suas origens é considerada uma forma ou variante do jazz, mas tem personalidade própria</label>
+                        <label><input type="radio" name="q88" value="c"> Não tem relação com o jazz</label>
+                        <label><input type="radio" name="q88" value="d"> É um subgênero do jazz sem personalidade própria</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Em suas origens é considerada uma forma ou variante do jazz, mas tem personalidade própria</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Aunque se considera que en sus orígenes es una forma o variante del jazz, el Bossa nova ha crecido, hasta tener una personalidad propia."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 39 de 50 (Música)</div>
+                    <p>Qual a origem da Salsa?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q89" value="a"> Combinação de ritmos caribenhos e afroamericanos</label>
+                        <label><input type="radio" name="q89" value="b"> Apenas ritmos africanos</label>
+                        <label><input type="radio" name="q89" value="c"> Apenas ritmos europeus</label>
+                        <label><input type="radio" name="q89" value="d"> Música indígena</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: a) Combinação de ritmos caribenhos e afroamericanos</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Sus orígenes los encontramos en una combinación de ritmos caribeños y afroamericanos."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 40 de 50 (Música)</div>
+                    <p>Com quais países são identificados a Salsa e o Merengue respectivamente?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q90" value="a"> Salsa com Cuba, Merengue com Porto Rico</label>
+                        <label><input type="radio" name="q90" value="b"> Salsa com Porto Rico, Merengue com República Dominicana</label>
+                        <label><input type="radio" name="q90" value="c"> Salsa com Colômbia, Merengue com Venezuela</label>
+                        <label><input type="radio" name="q90" value="d"> Salsa com México, Merengue com Panamá</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Salsa com Porto Rico, Merengue com República Dominicana</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Comúnmente, se identifica la salsa con Puerto Rico y el merengue con República Dominicana."</div>
+                </div>
+
+                <!-- Perguntas 41-50: Mais estilos -->
+                <div class="question">
+                    <div class="question-number">Questão 41 de 50 (Música)</div>
+                    <p>Qual a diferença entre Merengue e Salsa segundo o slide?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q91" value="a"> Merengue é mais lento</label>
+                        <label><input type="radio" name="q91" value="b"> Merengue é um poco más progresivo que la salsa, pero casi con la misma instrumentación</label>
+                        <label><input type="radio" name="q91" value="c"> Salsa tem mais instrumentos</label>
+                        <label><input type="radio" name="q91" value="d"> Merengue é mais antigo</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Merengue é um poco más progresivo que la salsa, pero casi con la misma instrumentación</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Es un poco más progresivo que la salsa, pero casi con la misma instrumentación."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 42 de 50 (Música)</div>
+                    <p>Qual a origem do Reguetón?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q92" value="a"> Cuba</label>
+                        <label><input type="radio" name="q92" value="b"> Porto Rico</label>
+                        <label><input type="radio" name="q92" value="c"> República Dominicana</label>
+                        <label><input type="radio" name="q92" value="d"> Colômbia</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Porto Rico</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Puerto Rico fue su cuna." (Reguetón)</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 43 de 50 (Música)</div>
+                    <p>Quais as influências do Reguetón?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q93" value="a"> Rock e pop</label>
+                        <label><input type="radio" name="q93" value="b"> Reggae e rap</label>
+                        <label><input type="radio" name="q93" value="c"> Jazz e blues</label>
+                        <label><input type="radio" name="q93" value="d"> Salsa e merengue</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Reggae e rap</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Su origen se remonta a mediados de 1990, con influencias del reggae y el rap."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 44 de 50 (Música)</div>
+                    <p>Quando surgiu o Reguetón?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q94" value="a"> Final dos anos 1970</label>
+                        <label><input type="radio" name="q94" value="b"> Mediados de 1990</label>
+                        <label><input type="radio" name="q94" value="c"> Início dos anos 2000</label>
+                        <label><input type="radio" name="q94" value="d"> Década de 1980</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Mediados de 1990</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Su origen se remonta a mediados de 1990."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 45 de 50 (Música)</div>
+                    <p>Qual a origem do Reggae?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q95" value="a"> Porto Rico</label>
+                        <label><input type="radio" name="q95" value="b"> Jamaica</label>
+                        <label><input type="radio" name="q95" value="c"> Cuba</label>
+                        <label><input type="radio" name="q95" value="d"> Brasil</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Jamaica</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "El estilo musical desarrollado en Jamaica a mediados de 1960."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 46 de 50 (Música)</div>
+                    <p>Do que o Reggae é uma evolução?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q96" value="a"> Salsa</label>
+                        <label><input type="radio" name="q96" value="b"> Rocksteady</label>
+                        <label><input type="radio" name="q96" value="c"> Merengue</label>
+                        <label><input type="radio" name="q96" value="d"> Calipso</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Rocksteady</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "El estilo musical desarrollado en Jamaica a mediados de 1960 se trata de una evolución del rocksteady, otro género surgido en la isla del Caribe."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 47 de 50 (Música)</div>
+                    <p>A que movimento o Reggae está ligado?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q97" value="a"> Movimento hippie</label>
+                        <label><input type="radio" name="q97" value="b"> Movimento rastafari</label>
+                        <label><input type="radio" name="q97" value="c"> Movimento punk</label>
+                        <label><input type="radio" name="q97" value="d"> Movimento grunge</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Movimento rastafari</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "La música está estrechamente ligada al movimiento rastafari, hasta el punto que de manera popular se confunden ambos términos."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 48 de 50 (Música)</div>
+                    <p>Em que década o Rap se diversificou e ultrapassou fronteiras?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q98" value="a"> 1960-1970</label>
+                        <label><input type="radio" name="q98" value="b"> 1970-1980</label>
+                        <label><input type="radio" name="q98" value="c"> 1980-1990</label>
+                        <label><input type="radio" name="q98" value="d"> 1990-2000</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: c) 1980-1990</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Durante 1980 y 1990, el rap se diversificó por todo el país y logró desbordar las fronteras estadounidenses."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 49 de 50 (Música)</div>
+                    <p>O que diz a Federación Internacional de la Industria Fonográfica (IFPI) sobre o K-Pop?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q99" value="a"> Que é um gênero em declínio</label>
+                        <label><input type="radio" name="q99" value="b"> Que se posiciona como um dos géneros musicais mais populares em todo o mundo</label>
+                        <label><input type="radio" name="q99" value="c"> Que é popular apenas na Ásia</label>
+                        <label><input type="radio" name="q99" value="d"> Que é menos popular que o J-Pop</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Que se posiciona como um dos géneros musicais mais populares em todo o mundo</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Tal y como apunta la Federación Internacional de la Industria Fonográfica (IFPI), el k-pop se posiciona en la actualidad como uno de los géneros musicales más populares en todo el mundo."</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Questão 50 de 50 (Música)</div>
+                    <p>Como são chamadas as produções atuais de música clásica?</p>
+                    <div class="options">
+                        <label><input type="radio" name="q100" value="a"> Música clásica moderna</label>
+                        <label><input type="radio" name="q100" value="b"> Música clásica contemporânea</label>
+                        <label><input type="radio" name="q100" value="c"> Neo-clásica</label>
+                        <label><input type="radio" name="q100" value="d"> Música sinfônica</label>
+                    </div>
+                    <div class="correct-answer" style="display: none;">Resposta correta: b) Música clásica contemporânea</div>
+                    <div class="explanation" style="display: none;">Segundo o slide: "Las producciones actuales se conocen como música clásica contemporánea."</div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button type="button" id="submit-btn">Verificar Respostas</button>
+                <button type="button" id="restart-btn">Reiniciar Quiz</button>
+            </div>
+        </form>
+        
+        <div class="result" id="result">
+            <div class="score" id="score"></div>
+            <div id="answers"></div>
+        </div>
+    </div>
+
+    <script>
+        const answers = {
+            // Presente de Subjuntivo (q1-q50)
+            q1: 'b', q2: 'b', q3: 'b', q4: 'c', q5: 'b',
+            q6: 'b', q7: 'c', q8: 'c', q9: 'b', q10: 'b',
+            q11: 'b', q12: 'b', q13: 'c', q14: 'c', q15: 'b',
+            q16: 'b', q17: 'd', q18: 'b', q19: 'b', q20: 'b',
+            q21: 'b', q22: 'b', q23: 'b', q24: 'b', q25: 'c',
+            q26: 'b', q27: 'b', q28: 'b', q29: 'c', q30: 'c',
+            q31: 'c', q32: 'b', q33: 'b', q34: 'b', q35: 'b',
+            q36: 'b', q37: 'b', q38: 'b', q39: 'b', q40: 'b',
+            q41: 'b', q42: 'b', q43: 'b', q44: 'b', q45: 'b',
+            q46: 'b', q47: 'b', q48: 'b', q49: 'b', q50: 'b',
+            
+            // Música (q51-q100)
+            q51: 'b', q52: 'c', q53: 'b', q54: 'c', q55: 'b',
+            q56: 'c', q57: 'b', q58: 'b', q59: 'c', q60: 'c',
+            q61: 'c', q62: 'b', q63: 'b', q64: 'c', q65: 'c',
+            q66: 'c', q67: 'b', q68: 'c', q69: 'b', q70: 'b',
+            q71: 'b', q72: 'b', q73: 'b', q74: 'b', q75: 'b',
+            q76: 'c', q77: 'b', q78: 'b', q79: 'b', q80: 'b',
+            q81: 'c', q82: 'b', q83: 'b', q84: 'b', q85: 'a',
+            q86: 'b', q87: 'b', q88: 'b', q89: 'a', q90: 'b',
+            q91: 'b', q92: 'b', q93: 'b', q94: 'b', q95: 'b',
+            q96: 'b', q97: 'b', q98: 'c', q99: 'b', q100: 'b'
+        };
+
+        function showTab(tabNumber) {
+            // Esconder todos os grupos de questões
+            document.querySelectorAll('.question-group').forEach(group => {
+                group.classList.remove('active');
+            });
+            
+            // Mostrar o grupo selecionado
+            document.getElementById(`group-${tabNumber}`).classList.add('active');
+            
+            // Atualizar a navegação
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab')[tabNumber-1].classList.add('active');
+            
+            // Scroll para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Adicionar event listeners para feedback imediato
+        document.addEventListener('DOMContentLoaded', function() {
+            const allInputs = document.querySelectorAll('input[type="radio"]');
+            
+            allInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    const questionName = this.name;
+                    const selectedValue = this.value;
+                    const correctAnswer = answers[questionName];
+                    
+                    // Encontrar a div da questão
+                    const questionDiv = this.closest('.question');
+                    const correctAnswerDiv = questionDiv.querySelector('.correct-answer');
+                    const explanationDiv = questionDiv.querySelector('.explanation');
+                    
+                    // Mostrar feedback imediato
+                    if (selectedValue === correctAnswer) {
+                        correctAnswerDiv.className = 'correct';
+                        correctAnswerDiv.style.display = 'block';
+                        explanationDiv.style.display = 'block';
+                    } else {
+                        correctAnswerDiv.className = 'incorrect';
+                        correctAnswerDiv.style.display = 'block';
+                        explanationDiv.style.display = 'block';
+                    }
+                });
+            });
+        });
+        
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            let score = 0;
+            const totalQuestions = Object.keys(answers).length;
+            const resultDiv = document.getElementById('result');
+            const scoreDiv = document.getElementById('score');
+            const answersDiv = document.getElementById('answers');
+            const submitBtn = document.getElementById('submit-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            
+            answersDiv.innerHTML = '';
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAnswer = answers[`q${i}`];
+                const questionDiv = document.querySelector(`input[name="q${i}"]`).closest('.question');
+                const correctAnswerDiv = questionDiv.querySelector('.correct-answer');
+                const explanationDiv = questionDiv.querySelector('.explanation');
+                
+                // Mostrar todas as respostas corretas e explicações
+                correctAnswerDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    score++;
+                    correctAnswerDiv.className = 'correct';
+                } else {
+                    correctAnswerDiv.className = 'incorrect';
+                }
+            }
+            
+            const percentage = (score / totalQuestions) * 100;
+            scoreDiv.textContent = `Você acertou ${score} de ${totalQuestions} questões (${percentage.toFixed(1)}%)`;
+            
+            if (percentage >= 70) {
+                scoreDiv.style.color = '#28a745';
+            } else if (percentage >= 50) {
+                scoreDiv.style.color = '#ffc107';
+            } else {
+                scoreDiv.style.color = '#dc3545';
+            }
+            
+            resultDiv.style.display = 'block';
+            submitBtn.style.display = 'none';
+            restartBtn.style.display = 'block';
+            
+            // Scroll to results
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        document.getElementById('restart-btn').addEventListener('click', function() {
+            // Reset all selections
+            const allInputs = document.querySelectorAll('input[type="radio"]');
+            allInputs.forEach(input => {
+                input.checked = false;
+            });
+            
+            // Hide all correct answers and explanations
+            const allAnswerDivs = document.querySelectorAll('.correct-answer');
+            allAnswerDivs.forEach(div => {
+                div.style.display = 'none';
+                div.classList.remove('correct', 'incorrect');
+            });
+            
+            const allExplanationDivs = document.querySelectorAll('.explanation');
+            allExplanationDivs.forEach(div => {
+                div.style.display = 'none';
+            });
+
+            // Reset buttons and result
+            document.getElementById('submit-btn').style.display = 'block';
+            document.getElementById('restart-btn').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
